@@ -4,9 +4,7 @@
         "inter": "This message is displayed between active days, if we ran on multiple days.",
         "post": "Thank you for swooping by! \nFly safe!",
         "logo": false,
-        "hasLomg": true,
-        "lomgTileSize": "0.3333",
-        "lomgLogosPerRow": 3,
+        "logoName": "images (1).jpeg",
         "title": "DJ SCHEDULE",
         "tagline": "DANCE TOGETHER, FLY TOGETHER",
         "logoCacheVersion": 1
@@ -22,107 +20,21 @@
             "name": "DJ Goofy",
             "startTime": 1769263200,
             "setLength": 60,
-            "logoId": 0,
+            "logoName": "images.jpeg",
             "genre": "LIVE! - Open House",
             "VJ": "Pammematth",
             "LD": "Axl & Kat Food",
             "FX": "Micca"
         },
         {
-            "name": "nullreff",
-            "startTime": 1769266800,
+            "name": "DJ Goofy 2",
+            "startTime": 1769263200,
             "setLength": 60,
-            "logoId": 1,
-            "genre": "Thunder",
-            "VJ": "nullreff & ValueFactory",
-            "LD": "Kat Food & nullreff",
-            "FX": "Happyrobot33, Micca, Windyote, Pammematth, Rowan, Icyvarix & Torvid"
-        },
-        {
-            "name": "b2b: JohCaw, Valant & KA!JU",
-            "startTime": 1769270400,
-            "setLength": 60,
-            "logoId": -1,
-            "genre": "Not Garage, DnB, Trap or Dubstep",
-            "VJ": "Pammematth, CyanLyan, Dmscootr & ValueFactory",
-            "LD": "Kat Food",
-            "FX": "",
-            "lomgDJs": 3,
-            "lomgSpeed": 0.3,
-            "lomgOffset": 0
-        },
-        {
-            "name": "CAWSTIC",
-            "startTime": 1769274000,
-            "setLength": 60,
-            "logoId": 2,
-            "genre": "Dark Bass",
-            "VJ": "",
-            "LD": "",
-            "FX": ""
-        },
-        {
-            "name": "ARP3GGI/O",
-            "startTime": 1769277600,
-            "setLength": 60,
-            "logoId": 3,
-            "genre": "Drum and Bass",
-            "VJ": "Micca",
-            "LD": "Micca",
-            "FX": ""
-        },
-        {
-            "name": "b2b: Dax & Hobnoxus",
-            "startTime": 1769281200,
-            "setLength": 60,
-            "logoId": -1,
-            "genre": "Neurofunk",
-            "VJ": "Captivated",
-            "LD": "Kuropper",
-            "FX": "",
-            "lomgDJs": 2,
-            "lomgSpeed": 0.2,
-            "lomgOffset": 3
-        },
-        {
-            "name": "Kima",
-            "startTime": 1769284800,
-            "setLength": 60,
-            "logoId": 4,
-            "genre": "Trance",
-            "VJ": "CyanLyan & Dmscootr",
-            "LD": "Raeschen",
-            "FX": ""
-        },
-        {
-            "name": "2N",
-            "startTime": 1769288400,
-            "setLength": 60,
-            "logoId": 5,
-            "genre": "Genre-fluid",
+            "logoName": "images (2).jpeg",
+            "genre": "LIVE! - Open House",
             "VJ": "Pammematth",
-            "LD": "Kat Food",
-            "FX": ""
-        },
-        {
-            "name": "Windworks",
-            "startTime": 1769292000,
-            "setLength": 20,
-            "logoId": 6,
-            "genre": "Fireworks & Drone Show",
-            "VJ": "",
-            "LD": "Windyote",
-            "FX": "Happyrobot33, Rowan, Talos & ValueFactory"
-        },
-        {
-            "name": "Intermission",
-            "startTime": 1769293200,
-            "setLength": 40,
-            "logoId": 7,
-            "genre": "Take a break, then we start again!",
-            "VJ": "",
-            "LD": "",
-            "FX": ""
+            "LD": "Axl & Kat Food",
+            "FX": "Micca"
         }
     ]
 }
