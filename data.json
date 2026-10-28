@@ -1,40 +1,131 @@
 {
     "messages": {
-        "pre": "Welcome back! The replay will start",
-        "inter": "This message is displayed between active days, if we ran on multiple days.",
-        "post": "Thank you for swooping by! \nFly safe!",
+        "pre": "?????",
+        "inter": "??????",
+        "post": "??????",
         "logo": false,
-        "logoName": "images (1).jpeg",
-        "title": "DJ SCHEDULE",
-        "tagline": "DANCE TOGETHER, FLY TOGETHER",
-        "logoCacheVersion": 1
+        "logoName": "TNS_Icon_v1.0_Transparent.webp",
+        "title": "Spirit Of The Symphony",
+        "tagline": "????????"
     },
     "displayActive": [
         {
-            "start": 1769262300,
-            "finish": 1769326800
+            "start": 1793394000,
+            "finish": 1793422800
+        },
+        {
+            "start": 1793480400,
+            "finish": 1793509200
         }
     ],
     "performers": [
         {
-            "name": "DJ Goofy",
-            "startTime": 1769263200,
+            "name": "Grimm Stone",
+            "startTime": 1793397600,
             "setLength": 60,
-            "logoName": "images.jpeg",
-            "genre": "LIVE! - Open House",
-            "VJ": "Pammematth",
-            "LD": "Axl & Kat Food",
-            "FX": "Micca"
+            "logoName": "Spirit Of The Symphony/DJ_Grimmy_Updated_Logo_Lit-1.webp",
+            "genre": "Electro Swing",
+            "VJ": "",
+            "LD": "Lirodon"
         },
         {
-            "name": "DJ Goofy 2",
-            "startTime": 1769263200,
+            "name": "Galdyr",
+            "startTime": 1793401200,
             "setLength": 60,
-            "logoName": "images (2).jpeg",
-            "genre": "LIVE! - Open House",
-            "VJ": "Pammematth",
-            "LD": "Axl & Kat Food",
-            "FX": "Micca"
+            "logoName": "Spirit Of The Symphony/galdyr_full-restransparent-1.webp",
+            "genre": "Liquid Drum n' Bass",
+            "VJ": "Siytron",
+            "LD": "Aetherios"
+        },
+        {
+            "name": "RE_SHVDE",
+            "startTime": 1793404800,
+            "setLength": 60,
+            "logoName": "Spirit Of The Symphony/RE_SHADELOGO2Transparent.png",
+            "genre": "Dark Club",
+            "VJ": "Pulse",
+            "LD": "Fiendir"
+        },
+        {
+            "name": "Weyerless",
+            "startTime": 1793408400,
+            "setLength": 60,
+            "logoName": "Spirit Of The Symphony/Wey_Logo_6k.png",
+            "genre": "Drum n' Bass",
+            "VJ": "Manik",
+            "LD": "Aetherios"
+        },
+        {
+            "name": "Ichy",
+            "startTime": 1793412000,
+            "setLength": 60,
+            "logoName": "Spirit Of The Symphony/image-24-1.webp",
+            "genre": "Jersey's Club / Baile Funk / 140",
+            "VJ": "Eunki",
+            "LD": "Goofy"
+        },
+        {
+            "name": "BirdBrain",
+            "startTime": 1793415600,
+            "setLength": 60,
+            "logoName": "Spirit Of The Symphony/BlankUpdatedBirdBrain.webp",
+            "genre": "Experimental Deep Dub",
+            "VJ": "Jayson",
+            "LD": "Goofy"
+        },
+        {
+            "name": "VAT",
+            "startTime": 1793484000,
+            "setLength": 60,
+            "logoName": "Spirit Of The Symphony/Vat_Logo colored(1).png",
+            "genre": "Psytrance",
+            "VJ": "",
+            "LD": "DubbyWubby"
+        },
+        {
+            "name": "GRN",
+            "startTime": 1793487600,
+            "setLength": 60,
+            "logoName": "Spirit Of The Symphony/21279-1.webp",
+            "genre": "UKG / UK Bass / 140 / Global Club",
+            "VJ": "Jayson",
+            "LD": "Kuropper"
+        },
+        {
+            "name": "Draven",
+            "startTime": 1793491200,
+            "setLength": 60,
+            "logoName": "Spirit Of The Symphony/draven-logo-2026_namegradient-1.webp",
+            "genre": "Midtempo",
+            "VJ": "",
+            "LD": "Lirodon"
+        },
+        {
+            "name": "Otomiru",
+            "startTime": 1793494800,
+            "setLength": 60,
+            "logoName": "Spirit Of The Symphony/eee-1.webp",
+            "genre": "Hard Techno / Schranz",
+            "VJ": "Manik",
+            "LD": "Oddy"
+        },
+        {
+            "name": "Mikish",
+            "startTime": 1793498400,
+            "setLength": 60,
+            "logoName": "Spirit Of The Symphony/color_bg-none.png",
+            "genre": "Crossbreed, Industrial Hardcore, Hard DnB",
+            "VJ": "Pulse",
+            "LD": "Draegon"
+        },
+        {
+            "name": "Pythax",
+            "startTime": 1793502000,
+            "setLength": 60,
+            "logoName": "Spirit Of The Symphony/Lorem_Ipsum-1.webp",
+            "genre": "Dubstep / Tearout / Trap / 140",
+            "VJ": "Pythax",
+            "LD": "LD"
         }
     ]
 }
