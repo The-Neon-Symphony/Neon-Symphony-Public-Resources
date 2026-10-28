@@ -25,8 +25,12 @@
             "setLength": 60,
             "logoName": "Spirit Of The Symphony/DJ_Grimmy_Updated_Logo_Lit-1.webp",
             "genre": "Electro Swing",
-            "VJ": "",
-            "LD": "Lirodon"
+            "credits": {
+                "VJ": [],
+                "LD": [
+                    "Lirodon"
+                ]
+            }
         },
         {
             "name": "Galdyr",
@@ -34,8 +38,14 @@
             "setLength": 60,
             "logoName": "Spirit Of The Symphony/galdyr_full-restransparent-1.webp",
             "genre": "Liquid Drum n' Bass",
-            "VJ": "Siytron",
-            "LD": "Aetherios"
+            "credits": {
+                "VJ": [
+                    "Siytron"
+                ],
+                "LD": [
+                    "Aetherios"
+                ]
+            }
         },
         {
             "name": "RE_SHVDE",
@@ -43,8 +53,14 @@
             "setLength": 60,
             "logoName": "Spirit Of The Symphony/RE_SHADELOGO2Transparent.png",
             "genre": "Dark Club",
-            "VJ": "Pulse",
-            "LD": "Fiendir"
+            "credits": {
+                "VJ": [
+                    "Pulse"
+                ],
+                "LD": [
+                    "Fiendir"
+                ]
+            }
         },
         {
             "name": "Weyerless",
@@ -52,8 +68,14 @@
             "setLength": 60,
             "logoName": "Spirit Of The Symphony/Wey_Logo_6k.png",
             "genre": "Drum n' Bass",
-            "VJ": "Manik",
-            "LD": "Aetherios"
+            "credits": {
+                "VJ": [
+                    "Manik"
+                ],
+                "LD": [
+                    "Aetherios"
+                ]
+            }
         },
         {
             "name": "Ichy",
@@ -61,8 +83,14 @@
             "setLength": 60,
             "logoName": "Spirit Of The Symphony/image-24-1.webp",
             "genre": "Jersey's Club / Baile Funk / 140",
-            "VJ": "Eunki",
-            "LD": "Goofy"
+            "credits": {
+                "VJ": [
+                    "Eunki"
+                ],
+                "LD": [
+                    "Goofy"
+                ]
+            }
         },
         {
             "name": "BirdBrain",
@@ -70,8 +98,14 @@
             "setLength": 60,
             "logoName": "Spirit Of The Symphony/BlankUpdatedBirdBrain.webp",
             "genre": "Experimental Deep Dub",
-            "VJ": "Jayson",
-            "LD": "Goofy"
+            "credits": {
+                "VJ": [
+                    "Jayson"
+                ],
+                "LD": [
+                    "Goofy"
+                ]
+            }
         },
         {
             "name": "VAT",
@@ -79,8 +113,12 @@
             "setLength": 60,
             "logoName": "Spirit Of The Symphony/Vat_Logo colored(1).png",
             "genre": "Psytrance",
-            "VJ": "",
-            "LD": "DubbyWubby"
+            "credits": {
+                "VJ": [],
+                "LD": [
+                    "DubbyWubby"
+                ]
+            }
         },
         {
             "name": "GRN",
@@ -88,8 +126,14 @@
             "setLength": 60,
             "logoName": "Spirit Of The Symphony/21279-1.webp",
             "genre": "UKG / UK Bass / 140 / Global Club",
-            "VJ": "Jayson",
-            "LD": "Kuropper"
+            "credits": {
+                "VJ": [
+                    "Jayson"
+                ],
+                "LD": [
+                    "Kuropper"
+                ]
+            }
         },
         {
             "name": "Draven",
@@ -97,8 +141,12 @@
             "setLength": 60,
             "logoName": "Spirit Of The Symphony/draven-logo-2026_namegradient-1.webp",
             "genre": "Midtempo",
-            "VJ": "",
-            "LD": "Lirodon"
+            "credits": {
+                "VJ": [],
+                "LD": [
+                    "Lirodon"
+                ]
+            }
         },
         {
             "name": "Otomiru",
@@ -106,8 +154,14 @@
             "setLength": 60,
             "logoName": "Spirit Of The Symphony/eee-1.webp",
             "genre": "Hard Techno / Schranz",
-            "VJ": "Manik",
-            "LD": "Oddy"
+            "credits": {
+                "VJ": [
+                    "Manik"
+                ],
+                "LD": [
+                    "Oddy"
+                ]
+            }
         },
         {
             "name": "Mikish",
@@ -115,8 +169,14 @@
             "setLength": 60,
             "logoName": "Spirit Of The Symphony/color_bg-none.png",
             "genre": "Crossbreed, Industrial Hardcore, Hard DnB",
-            "VJ": "Pulse",
-            "LD": "Draegon"
+            "credits": {
+                "VJ": [
+                    "Pulse"
+                ],
+                "LD": [
+                    "Draegon"
+                ]
+            }
         },
         {
             "name": "Pythax",
@@ -124,8 +184,14 @@
             "setLength": 60,
             "logoName": "Spirit Of The Symphony/Lorem_Ipsum-1.webp",
             "genre": "Dubstep / Tearout / Trap / 140",
-            "VJ": "Pythax",
-            "LD": "LD"
+            "credits": {
+                "VJ": [
+                    "Pythax"
+                ],
+                "LD": [
+                    "LD"
+                ]
+            }
         }
     ]
 }
