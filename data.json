@@ -5,7 +5,9 @@
         "post": "??????",
         "logo": true,
         "logoName": "TNS_Icon_v1.0_Transparent.webp",
+        "customTitle": true,
         "title": "Spirit Of The Symphony",
+        "customTagline": true,
         "tagline": "????????"
     },
     "displayActive": [
