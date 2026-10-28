@@ -1,16 +1,20 @@
 {
     "messages": {
-        "pre": "?????",
-        "inter": "??????",
-        "post": "??????",
+        "pre": "This is the pre text",
+        "inter": "This is the inter text",
+        "post": "This is the post text",
         "logo": true,
         "logoName": "TNS_Icon_v1.0_Transparent.webp",
         "customTitle": true,
         "title": "Spirit Of The Symphony",
         "customTagline": true,
-        "tagline": "????????"
+        "tagline": "This is the tagline!"
     },
     "displayActive": [
+        {
+            "start": 0,
+            "finish": 1793422800
+        },
         {
             "start": 1793394000,
             "finish": 1793422800
