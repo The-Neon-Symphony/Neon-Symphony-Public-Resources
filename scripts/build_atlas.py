@@ -3,6 +3,8 @@
 import argparse
 import json
 import math
+import os
+import subprocess
 import sys
 from pathlib import Path
 
@@ -29,6 +31,16 @@ def fit_square(img, size):
     cell = Image.new("RGBA", (size, size), (0, 0, 0, 0))
     cell.paste(img, ((size - w) // 2, (size - h) // 2))
     return cell
+
+
+def git_hash():
+    sha = os.environ.get("GITHUB_SHA")
+    if sha:
+        return sha
+    try:
+        return subprocess.check_output(["git", "rev-parse", "HEAD"], text=True).strip()
+    except (OSError, subprocess.CalledProcessError):
+        return None
 
 
 def main():
@@ -79,6 +91,10 @@ def main():
                 items.append(("logoUV", uv))
         e.clear()
         e.update(items)
+
+    sha = git_hash()
+    if sha and isinstance(data.get("messages"), dict):
+        data["messages"]["gitHash"] = sha
 
     out = Path(args.out)
     out.mkdir(parents=True, exist_ok=True)
