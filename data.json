@@ -1,21 +1,16 @@
 {
     "messages": {
-        "pre": "This is the pre text",
-        "inter": "This is the inter text",
-        "post": "This is the post text",
+        "pre": "Day 1 of the event starts at ",
+        "inter": "Come back for Day 2 at ",
+        "post": "The event has ended, come by for our next event!",
         "logo": true,
         "logoName": "TNS_Icon_v1.0_Transparent.webp",
         "customTitle": true,
         "title": "Spirit Of The Symphony",
         "customTagline": true,
-        "tagline": "This is the tagline!"
+        "tagline": "Spooky Month"
     },
     "displayActive": [
-        {
-            "name": "Testing",
-            "start": 1793290800,
-            "finish": 1793291400
-        },
         {
             "name": "Day 1",
             "start": 1793394000,
