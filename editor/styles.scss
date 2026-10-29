@@ -1,13 +1,13 @@
 $bg: #14121c;
 $bar: #0e0c15;
-$card: #1f1c2b;
-$line: #37324a;
-$fg: #e9e6f5;
-$dim: #9a94b5;
-$accent: #8f6bff;
-$danger: #7a2b3a;
-$ok: #7be0a0;
-$err: #ff8a9b;
+$card: #5a5a5a;
+$line: #ffffff;
+$fg: #ffffff;
+$dim: #b8b8b8;
+$accent: #ffc800;
+$danger: #ff002f;
+$ok: #04ff00;
+$err: #ff0026;
 
 @mixin field-grid($min) {
   display: grid;
