@@ -6,6 +6,8 @@ const $ = (selector) => document.querySelector(selector);
 const pad = (n) => String(n).padStart(2, "0");
 const TIMESTAMP_KEYS = new Set(["start", "finish", "startTime"]);
 const MULTILINE_KEYS = new Set(["pre", "inter", "post"]);
+// Fields added by the publish action; they must never appear in the source data.json.
+const GENERATED_KEYS = ["logoUV", "gitHash"];
 const TZ = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
 $("#tzname").textContent = TZ;
@@ -94,17 +96,42 @@ function timestampField(obj, key) {
 }
 
 function creditsField(obj, key) {
-  const grid = el("div", { class: "grid" });
-  for (const role of Object.keys(obj[key])) {
-    const area = el("textarea", { rows: 3 });
-    area.value = obj[key][role].join("\n");
-    area.oninput = () => {
-      obj[key][role] = area.value.split("\n").map((s) => s.trim()).filter(Boolean);
+  const credits = obj[key];
+  const box = el("div", { class: "credits" });
+
+  const draw = () => {
+    const grid = el("div", { class: "grid" });
+    for (const role of Object.keys(credits)) {
+      const area = el("textarea", { rows: 3 });
+      area.value = credits[role].join("\n");
+      area.oninput = () => {
+        credits[role] = area.value.split("\n").map((s) => s.trim()).filter(Boolean);
+        onChange();
+      };
+      grid.append(el("div", { class: "credits__role" },
+        el("div", { class: "credits__role-head" }, role,
+          button("Remove", "danger", () => { delete credits[role]; draw(); onChange(); })),
+        area));
+    }
+
+    const name = el("input", { type: "text", placeholder: "New section (e.g. FX)" });
+    const add = () => {
+      const role = name.value.trim();
+      if (!role || role in credits) return;
+      credits[role] = [];
+      draw();
       onChange();
     };
-    grid.append(labeled(role, area));
-  }
-  return el("div", { class: "credits" }, el("div", { class: "hint" }, `${key} (one name per line)`), grid);
+    name.onkeydown = (e) => { if (e.key === "Enter") add(); };
+
+    box.replaceChildren(
+      el("div", { class: "hint" }, `${key} (one name per line)`),
+      grid,
+      el("div", { class: "credits__add" }, name, button("+ Add section", "secondary", add)));
+  };
+
+  draw();
+  return box;
 }
 
 function field(obj, key) {
@@ -117,7 +144,9 @@ function field(obj, key) {
     const box = el("input", { type: "checkbox" });
     box.checked = value;
     box.onchange = () => { obj[key] = box.checked; onChange(); };
-    return el("label", { class: "field field--check" }, box, key);
+    box.title = key;
+    box.setAttribute("aria-label", key);
+    return el("label", { class: "field field--check" }, box);
   }
 
   if (typeof value === "number") {
@@ -210,10 +239,16 @@ function render() {
     listSection("Performers", data.performers, newPerformer, (p, i) => `${i + 1}. ${p.name || "(unnamed)"}`));
 }
 
+function stripGenerated(obj) {
+  for (const key of GENERATED_KEYS) delete obj[key];
+}
+
 function load(obj) {
   obj.messages ||= {};
   obj.displayActive ||= [];
   obj.performers ||= [];
+  stripGenerated(obj.messages);
+  obj.performers.forEach(stripGenerated);
   data = obj;
   render();
   onChange();
