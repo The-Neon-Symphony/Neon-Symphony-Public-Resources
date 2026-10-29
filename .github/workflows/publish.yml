@@ -35,6 +35,12 @@ jobs:
           pip install pillow
           python scripts/build_atlas.py --data data.json --images images --out _site
 
+      - name: Build editor
+        run: |
+          mkdir _site/editor
+          cp editor/index.html editor/app.js _site/editor/
+          npx --yes sass --no-source-map editor/styles.scss _site/editor/styles.css
+
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
