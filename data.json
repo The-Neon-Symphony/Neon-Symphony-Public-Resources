@@ -12,14 +12,17 @@
     },
     "displayActive": [
         {
+            "name": "Testing",
             "start": 0,
             "finish": 1793422800
         },
         {
+            "name": "Day 1",
             "start": 1793394000,
             "finish": 1793422800
         },
         {
+            "name": "Day 2",
             "start": 1793480400,
             "finish": 1793509200
         }

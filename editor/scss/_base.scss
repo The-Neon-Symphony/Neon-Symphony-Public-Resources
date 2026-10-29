@@ -1,0 +1,32 @@
+@use "variables" as *;
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font:
+    14px/1.4 system-ui,
+    sans-serif;
+  background: $bg;
+  color: $fg;
+  color-scheme: dark;
+}
+
+.hint {
+  color: $dim;
+  font-size: 12px;
+}
+
+.error {
+  color: $err;
+}
+
+.status {
+  color: $ok;
+
+  &.error {
+    color: $err;
+  }
+}

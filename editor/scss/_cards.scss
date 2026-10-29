@@ -1,0 +1,17 @@
+@use "variables" as *;
+
+.card {
+  background: $card;
+  // border: 1px solid $line;
+  // border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 10px;
+
+  &__head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+}

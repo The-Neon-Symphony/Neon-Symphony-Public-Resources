@@ -1,0 +1,14 @@
+@use "variables" as *;
+
+@mixin field-grid($min) {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax($min, 1fr));
+  gap: 10px;
+}
+
+@mixin dashed-box {
+  grid-column: 1 / -1;
+  border: 1px dashed $line;
+  // border-radius: 6px;
+  padding: 8px;
+}

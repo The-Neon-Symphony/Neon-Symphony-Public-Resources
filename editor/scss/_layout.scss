@@ -1,0 +1,51 @@
+@use "variables" as *;
+
+.toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: $bar;
+
+  h1 {
+    font-size: 16px;
+    margin: 0 auto 0 0;
+  }
+}
+
+.page {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+  align-items: start;
+
+  &__column {
+    min-width: 0;
+  }
+
+  @media (max-width: 1000px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.section {
+  margin-bottom: 24px;
+
+  h2 {
+    font-size: 15px;
+    margin: 0 0 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+}

@@ -38,7 +38,8 @@ jobs:
       - name: Build editor
         run: |
           mkdir _site/editor
-          cp editor/index.html editor/app.js _site/editor/
+          cp editor/index.html _site/editor/
+          cp -r editor/js _site/editor/js
           npx --yes sass --no-source-map editor/styles.scss _site/editor/styles.css
 
       - uses: actions/configure-pages@v5

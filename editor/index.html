@@ -5,33 +5,152 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>data.json editor</title>
   <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+  <script type="module" src="js/app.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3/dist/cdn.min.js"></script>
 </head>
-<body>
+<body x-data="editor">
   <header class="toolbar">
     <h1>data.json editor</h1>
-    <button class="btn btn--secondary" id="loadFile">Open file…</button>
-    <button class="btn btn--secondary" id="loadRemote">Fetch ../data.json</button>
-    <button class="btn btn--secondary" id="loadPaste">Load from output box</button>
-    <button class="btn" id="copy">Copy JSON</button>
-    <span class="status" id="status"></span>
-    <input type="file" id="file" accept=".json,application/json" hidden>
+    <button class="btn btn--secondary" @click="$refs.file.click()">Open file…</button>
+    <button class="btn btn--secondary" @click="loadRemote()">Fetch ../data.json</button>
+    <button class="btn btn--secondary" @click="loadOutput($refs.out.value)">Load from output box</button>
+    <button class="btn" @click="copy($refs.out)">Copy JSON</button>
+    <span class="status" :class="{ error: status.error }" x-text="status.text"></span>
+    <input type="file" x-ref="file" accept=".json,application/json" hidden @change="loadFile($event)">
   </header>
 
   <main class="page">
     <p class="hint">
       Edit below, then press <b>Copy JSON</b> and paste it over <code>data.json</code> in VS Code.
-      Times are shown in your local zone (<span id="tzname"></span>) and UTC.
+      Nothing is saved or uploaded. Times are shown in your local zone (<span x-text="TZ"></span>) and UTC.
     </p>
 
-    <div id="app"></div>
+    <section class="section timeline">
+      <h2>Timeline <span class="hint">(local time, <span x-text="TZ"></span>)</span></h2>
+      <div class="timeline__chart" x-effect="drawTimeline($el)"></div>
+    </section>
+
+    <div class="layout">
+      <template x-for="(column, c) in columns" :key="c">
+        <div class="layout__column">
+          <template x-for="(section, s) in column" :key="s">
+            <section class="section">
+              <h2>
+                <span x-text="section.title"></span>
+                <button class="btn btn--secondary" x-show="section.make" @click="section.list.push(section.make())">+ Add</button>
+              </h2>
+
+              <template x-for="(item, i) in section.list" :key="i">
+                <div class="card">
+                  <div class="card__head" x-show="!section.single">
+                    <span x-text="section.label?.(item, i)"></span>
+                    <span>
+                      <button class="btn btn--secondary" title="Move up" @click="move(section.list, i, -1)">↑</button>
+                      <button class="btn btn--secondary" title="Move down" @click="move(section.list, i, 1)">↓</button>
+                      <button class="btn btn--secondary" @click="duplicate(section.list, i)">Duplicate</button>
+                      <button class="btn btn--danger" @click="section.list.splice(i, 1)">Delete</button>
+                    </span>
+                  </div>
+
+                  <div class="grid">
+                    <template x-for="(row, r) in rows(item)" :key="row.join()">
+                      <div :class="row.length > 1 ? 'toggle-row' : 'row'">
+                        <template x-for="key in row" :key="key">
+                          <div class="row">
+                            <template x-if="kind(item, key) === 'timestamp'">
+                              <div class="timestamp">
+                                <span class="timestamp__title" x-text="key"></span>
+                                <label class="field"><span x-text="`Local (${TZ})`"></span>
+                                  <input type="datetime-local" step="1" :value="toLocal(item[key])" @input="setLocal(item, key, $event.target.value)">
+                                </label>
+                                <label class="field">UTC
+                                  <input type="datetime-local" step="1" :value="toUtc(item[key])" @input="setUtc(item, key, $event.target.value)">
+                                </label>
+                                <label class="field">Epoch seconds
+                                  <input type="number" step="1" x-model.number="item[key]">
+                                </label>
+                              </div>
+                            </template>
+
+                            <template x-if="kind(item, key) === 'credits'">
+                              <div class="credits" x-data="{ newRole: '' }">
+                                <div class="hint" x-text="key"></div>
+                                <div class="grid">
+                                  <template x-for="role in Object.keys(item[key])" :key="role">
+                                    <div class="credits__role">
+                                      <div class="credits__role-head">
+                                        <span x-text="role"></span>
+                                        <button class="btn btn--danger" @click="delete item[key][role]">Remove section</button>
+                                      </div>
+                                      <div class="credits__names">
+                                        <template x-for="(name, n) in item[key][role]" :key="n">
+                                          <div class="credits__entry">
+                                            <input type="text" placeholder="Name" x-model="item[key][role][n]">
+                                            <button class="btn btn--danger" title="Remove entry" @click="item[key][role].splice(n, 1)">−</button>
+                                          </div>
+                                        </template>
+                                      </div>
+                                      <button class="btn btn--secondary" @click="item[key][role].push('')">+ Add entry</button>
+                                    </div>
+                                  </template>
+                                </div>
+                                <div class="credits__add">
+                                  <input type="text" placeholder="New section (e.g. FX)" x-model="newRole"
+                                         @keydown.enter="addRole(item[key], newRole); newRole = ''">
+                                  <button class="btn btn--secondary" @click="addRole(item[key], newRole); newRole = ''">+ Add section</button>
+                                </div>
+                              </div>
+                            </template>
+
+                            <template x-if="kind(item, key) === 'boolean'">
+                              <label class="field field--check" :title="key">
+                                <input type="checkbox" :aria-label="key" x-model="item[key]">
+                              </label>
+                            </template>
+
+                            <template x-if="kind(item, key) === 'number'">
+                              <label class="field"><span x-text="key"></span>
+                                <input type="number" x-model.number="item[key]">
+                              </label>
+                            </template>
+
+                            <template x-if="kind(item, key) === 'text'">
+                              <label class="field"><span x-text="key"></span>
+                                <input type="text" x-model="item[key]">
+                              </label>
+                            </template>
+
+                            <template x-if="kind(item, key) === 'multiline'">
+                              <label class="field field--wide"><span x-text="key"></span>
+                                <textarea rows="3" x-model="item[key]"></textarea>
+                              </label>
+                            </template>
+
+                            <template x-if="kind(item, key) === 'raw'">
+                              <label class="field"><span x-text="`${key} (raw JSON)`"></span>
+                                <textarea rows="4" :value="rawText(item[key])" @input="setRaw(item, key, $event.target)"></textarea>
+                              </label>
+                            </template>
+                          </div>
+                        </template>
+                      </div>
+                    </template>
+                  </div>
+                </div>
+              </template>
+            </section>
+          </template>
+        </div>
+      </template>
+    </div>
 
     <section class="section">
       <h2>Output JSON</h2>
-      <textarea class="output" id="out" spellcheck="false"></textarea>
-      <div class="error" id="jsonErr"></div>
+      <textarea class="output" x-ref="out" spellcheck="false"
+                x-effect="$el.value = output" @input="checkOutput($event.target.value)"></textarea>
+      <div class="error" x-text="jsonError"></div>
     </section>
   </main>
-
-  <script src="app.js"></script>
 </body>
 </html>
