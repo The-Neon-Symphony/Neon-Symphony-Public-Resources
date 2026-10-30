@@ -15,3 +15,18 @@
     font-weight: 600;
   }
 }
+
+.events {
+  margin-top: 10px;
+
+  ul {
+    margin: 4px 0 0;
+    padding-left: 18px;
+    font-size: 13px;
+  }
+
+  li span:first-child {
+    color: $dim;
+    font-variant-numeric: tabular-nums;
+  }
+}

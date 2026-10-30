@@ -38,7 +38,7 @@
             <section class="section">
               <h2>
                 <span x-text="section.title"></span>
-                <button class="btn btn--secondary" x-show="section.make" @click="section.list.push(section.make())">+ Add</button>
+                <button class="btn btn--secondary" x-show="section.make" @click="add(section)">+ Add</button>
               </h2>
 
               <template x-for="(item, i) in section.list" :key="i">
@@ -46,8 +46,8 @@
                   <div class="card__head" x-show="!section.single">
                     <span x-text="section.label?.(item, i)"></span>
                     <span>
-                      <button class="btn btn--secondary" title="Move up" @click="move(section.list, i, -1)">↑</button>
-                      <button class="btn btn--secondary" title="Move down" @click="move(section.list, i, 1)">↓</button>
+                      <button class="btn btn--secondary" title="Move up" x-show="!section.sorted" @click="move(section.list, i, -1)">↑</button>
+                      <button class="btn btn--secondary" title="Move down" x-show="!section.sorted" @click="move(section.list, i, 1)">↓</button>
                       <button class="btn btn--secondary" @click="duplicate(section.list, i)">Duplicate</button>
                       <button class="btn btn--danger" @click="section.list.splice(i, 1)">Delete</button>
                     </span>
@@ -62,13 +62,13 @@
                               <div class="timestamp">
                                 <span class="timestamp__title" x-text="key"></span>
                                 <label class="field"><span x-text="`Local (${TZ})`"></span>
-                                  <input type="datetime-local" step="1" :value="toLocal(item[key])" @input="setLocal(item, key, $event.target.value)">
+                                  <input type="datetime-local" step="1" :value="toLocal(item[key])" @input="setLocal(item, key, $event.target.value)" @change="committed(section, key)">
                                 </label>
                                 <label class="field">UTC
-                                  <input type="datetime-local" step="1" :value="toUtc(item[key])" @input="setUtc(item, key, $event.target.value)">
+                                  <input type="datetime-local" step="1" :value="toUtc(item[key])" @input="setUtc(item, key, $event.target.value)" @change="committed(section, key)">
                                 </label>
                                 <label class="field">Epoch seconds
-                                  <input type="number" step="1" x-model.number="item[key]">
+                                  <input type="number" step="1" x-model.number="item[key]" @change="committed(section, key)">
                                 </label>
                               </div>
                             </template>
@@ -149,6 +149,15 @@
                         </template>
                       </div>
                     </template>
+                  </div>
+
+                  <div class="events" x-show="section.windowed">
+                    <div class="hint" x-text="`Events in this window (${eventsIn(item).length})`"></div>
+                    <ul>
+                      <template x-for="p in eventsIn(item)" :key="p.startTime + p.name">
+                        <li><span x-text="eventTime(p)"></span> <span x-text="p.name || '(unnamed)'"></span></li>
+                      </template>
+                    </ul>
                   </div>
                 </div>
               </template>

@@ -11,6 +11,7 @@ const MULTILINE_KEYS = ["pre", "inter", "post"];
 const GENERATED_KEYS = ["logoUV", "instanceLogoUV", "gitHash"];
 
 const now = () => Math.floor(Date.now() / 1000);
+const byStart = (a, b) => (a.start ?? 0) - (b.start ?? 0);
 
 document.addEventListener("alpine:init", () => {
   Alpine.data("editor", () => ({
@@ -31,7 +32,7 @@ document.addEventListener("alpine:init", () => {
 
     load(obj) {
       obj.messages ||= {};
-      obj.displayActive = (obj.displayActive || []).map((w) => ({ name: "", ...w }));
+      obj.displayActive = (obj.displayActive || []).map((w) => ({ name: "", ...w })).sort(byStart);
       obj.instances ||= [];
       obj.performers ||= [];
       for (const target of [obj.messages, ...obj.instances, ...obj.performers]) GENERATED_KEYS.forEach((k) => delete target[k]);
@@ -112,7 +113,7 @@ document.addEventListener("alpine:init", () => {
       return [
         [
           { title: "Messages", list: [d.messages], single: true },
-          { title: "Display active windows", list: d.displayActive, label: (it, i) => label(it, i, "(unnamed window)"),
+          { title: "Display active windows", list: d.displayActive, sorted: true, windowed: true, label: (it, i) => label(it, i, "(unnamed window)"),
             make: () => ({ name: "", start: now(), finish: now() + 3600 }) },
           { title: "Instances", list: d.instances, label: (it, i) => `${it.id ?? "?"}. ${it.name || "(unnamed)"}`,
             make: () => ({ id: this.nextInstanceId(), name: "", instanceLogoName: "" }) },
@@ -128,6 +129,33 @@ document.addEventListener("alpine:init", () => {
       ];
     },
 
+    // Display windows are always kept ordered by start time.
+    sortWindows() {
+      this.data.displayActive.sort(byStart);
+    },
+
+    add(section) {
+      section.list.push(section.make());
+      if (section.sorted) this.sortWindows();
+    },
+
+    // Re-sort only once an edit is committed so cards don't jump while typing.
+    committed(section, key) {
+      if (section.sorted && key === "start") this.sortWindows();
+    },
+
+    // Performers whose whole set lies inside the window.
+    eventsIn(win) {
+      return this.data.performers
+        .filter((p) => p.startTime >= win.start && p.startTime + (p.setLength || 0) * 60 <= win.finish)
+        .sort((a, b) => a.startTime - b.startTime);
+    },
+
+    eventTime(p) {
+      const fmt = (sec) => new Date(sec * 1000).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+      return `${fmt(p.startTime)}–${fmt(p.startTime + (p.setLength || 0) * 60)}`;
+    },
+
     nextInstanceId() {
       return Math.max(0, ...this.data.instances.map((x) => Number(x.id) || 0)) + 1;
     },
@@ -137,6 +165,7 @@ document.addEventListener("alpine:init", () => {
       const copy = structuredClone(Alpine.raw(list[i]));
       if (list === this.data.instances) copy.id = this.nextInstanceId();
       list.splice(i + 1, 0, copy);
+      if (list === this.data.displayActive) this.sortWindows();
     },
 
     move(list, i, delta) {
