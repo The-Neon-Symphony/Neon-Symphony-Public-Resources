@@ -12,19 +12,14 @@
     },
     "displayActive": [
         {
-            "name": "Testing",
-            "start": 1793385600,
-            "finish": 1793472834
-        },
-        {
             "name": "Day 1",
-            "start": 1793394000,
-            "finish": 1793422800
+            "start": 1793397600,
+            "finish": 1793419200
         },
         {
             "name": "Day 2",
-            "start": 1793480400,
-            "finish": 1793509200
+            "start": 1793484000,
+            "finish": 1793505600
         }
     ],
     "instances": [
