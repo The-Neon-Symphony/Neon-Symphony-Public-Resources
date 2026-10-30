@@ -67,7 +67,7 @@
         },
         {
             "name": "RE_SHVDE",
-            "instanceId": 1,
+            "instanceId": 2,
             "startTime": 1793404800,
             "setLength": 60,
             "logoName": "Spirit Of The Symphony/RE_SHADELOGO2Transparent.png",
@@ -83,7 +83,7 @@
         },
         {
             "name": "Weyerless",
-            "instanceId": 1,
+            "instanceId": 2,
             "startTime": 1793408400,
             "setLength": 60,
             "logoName": "Spirit Of The Symphony/Wey_Logo_6k.png",
@@ -161,7 +161,7 @@
         },
         {
             "name": "Draven",
-            "instanceId": 1,
+            "instanceId": 2,
             "startTime": 1793491200,
             "setLength": 60,
             "logoName": "Spirit Of The Symphony/draven-logo-2026_namegradient-1.webp",
@@ -175,7 +175,7 @@
         },
         {
             "name": "Otomiru",
-            "instanceId": 1,
+            "instanceId": 2,
             "startTime": 1793494800,
             "setLength": 60,
             "logoName": "Spirit Of The Symphony/eee-1.webp",
