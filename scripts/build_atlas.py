@@ -14,13 +14,18 @@ ATLAS_SIZE = 2048
 ATLAS_NAME = "atlas.png"
 
 
+# (name key, generated UV key) pairs; each entry gets its UV right after its name key.
+LOGO_KEYS = (("logoName", "logoUV"), ("instanceLogoName", "instanceLogoUV"))
+
+
 def collect(data):
     entries = []
     messages = data.get("messages")
     if isinstance(messages, dict):
         entries.append(messages)
-    entries.extend(p for p in data.get("performers", []) if isinstance(p, dict))
-    return [e for e in entries if e.get("logoName")]
+    for group in ("instances", "performers"):
+        entries.extend(p for p in data.get(group, []) if isinstance(p, dict))
+    return [(e, n, u) for e in entries for n, u in LOGO_KEYS if e.get(n)]
 
 
 def fit_square(img, size):
@@ -55,13 +60,14 @@ def main():
     images_dir = Path(args.images)
 
     names = []
-    for e in entries:
-        e.pop("logoUV", None)
-        if e["logoName"] not in names:
-            if (images_dir / e["logoName"]).is_file():
-                names.append(e["logoName"])
+    for e, name_key, uv_key in entries:
+        e.pop(uv_key, None)
+        name = e[name_key]
+        if name not in names:
+            if (images_dir / name).is_file():
+                names.append(name)
             else:
-                print(f"warning: {e['logoName']} not found in {images_dir}", file=sys.stderr)
+                print(f"warning: {name} not found in {images_dir}", file=sys.stderr)
 
     atlas = Image.new("RGBA", (ATLAS_SIZE, ATLAS_SIZE), (0, 0, 0, 0))
     uvs = {}
@@ -79,16 +85,16 @@ def main():
                 "h": cell / ATLAS_SIZE,
             }
 
-    # Insert logoUV directly after logoName, preserving key order.
-    for e in entries:
-        uv = uvs.get(e["logoName"])
+    # Insert the UV directly after its name key, preserving key order.
+    for e, name_key, uv_key in entries:
+        uv = uvs.get(e[name_key])
         if uv is None:
             continue
         items = []
         for k, v in e.items():
             items.append((k, v))
-            if k == "logoName":
-                items.append(("logoUV", uv))
+            if k == name_key:
+                items.append((uv_key, uv))
         e.clear()
         e.update(items)
 

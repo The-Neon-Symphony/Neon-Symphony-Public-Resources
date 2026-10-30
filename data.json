@@ -22,9 +22,22 @@
             "finish": 1793509200
         }
     ],
+    "instances": [
+        {
+            "id": 1,
+            "name": "Gold",
+            "instanceLogoName": "gold-instance.webp"
+        },
+        {
+            "id": 2,
+            "name": "Silver",
+            "instanceLogoName": "silver-instance.webp"
+        }
+    ],
     "performers": [
         {
             "name": "Grimm Stone",
+            "instanceId": 1,
             "startTime": 1793397600,
             "setLength": 60,
             "logoName": "Spirit Of The Symphony/DJ_Grimmy_Updated_Logo_Lit-1.webp",
@@ -38,6 +51,7 @@
         },
         {
             "name": "Galdyr",
+            "instanceId": 1,
             "startTime": 1793401200,
             "setLength": 60,
             "logoName": "Spirit Of The Symphony/galdyr_full-restransparent-1.webp",
@@ -53,6 +67,7 @@
         },
         {
             "name": "RE_SHVDE",
+            "instanceId": 1,
             "startTime": 1793404800,
             "setLength": 60,
             "logoName": "Spirit Of The Symphony/RE_SHADELOGO2Transparent.png",
@@ -68,6 +83,7 @@
         },
         {
             "name": "Weyerless",
+            "instanceId": 1,
             "startTime": 1793408400,
             "setLength": 60,
             "logoName": "Spirit Of The Symphony/Wey_Logo_6k.png",
@@ -83,6 +99,7 @@
         },
         {
             "name": "Ichy",
+            "instanceId": 1,
             "startTime": 1793412000,
             "setLength": 60,
             "logoName": "Spirit Of The Symphony/image-24-1.webp",
@@ -98,6 +115,7 @@
         },
         {
             "name": "BirdBrain",
+            "instanceId": 1,
             "startTime": 1793415600,
             "setLength": 60,
             "logoName": "Spirit Of The Symphony/BlankUpdatedBirdBrain.webp",
@@ -113,6 +131,7 @@
         },
         {
             "name": "VAT",
+            "instanceId": 1,
             "startTime": 1793484000,
             "setLength": 60,
             "logoName": "Spirit Of The Symphony/Vat_Logo colored(1).png",
@@ -126,6 +145,7 @@
         },
         {
             "name": "GRN",
+            "instanceId": 1,
             "startTime": 1793487600,
             "setLength": 60,
             "logoName": "Spirit Of The Symphony/21279-1.webp",
@@ -141,6 +161,7 @@
         },
         {
             "name": "Draven",
+            "instanceId": 1,
             "startTime": 1793491200,
             "setLength": 60,
             "logoName": "Spirit Of The Symphony/draven-logo-2026_namegradient-1.webp",
@@ -154,6 +175,7 @@
         },
         {
             "name": "Otomiru",
+            "instanceId": 1,
             "startTime": 1793494800,
             "setLength": 60,
             "logoName": "Spirit Of The Symphony/eee-1.webp",
@@ -169,6 +191,7 @@
         },
         {
             "name": "Mikish",
+            "instanceId": 1,
             "startTime": 1793498400,
             "setLength": 60,
             "logoName": "Spirit Of The Symphony/color_bg-none.png",
@@ -184,6 +207,7 @@
         },
         {
             "name": "Pythax",
+            "instanceId": 1,
             "startTime": 1793502000,
             "setLength": 60,
             "logoName": "Spirit Of The Symphony/Lorem_Ipsum-1.webp",

@@ -109,6 +109,19 @@
                               </label>
                             </template>
 
+                            <template x-if="kind(item, key) === 'instance'">
+                              <label class="field"><span x-text="key"></span>
+                                <select x-model.number="item[key]">
+                                  <template x-for="inst in data.instances" :key="inst.id">
+                                    <option :value="inst.id" :selected="inst.id === item[key]" x-text="`${inst.id}. ${inst.name || '(unnamed)'}`"></option>
+                                  </template>
+                                  <template x-if="!data.instances.some((x) => x.id === item[key])">
+                                    <option :value="item[key]" selected x-text="`${item[key]} (missing)`"></option>
+                                  </template>
+                                </select>
+                              </label>
+                            </template>
+
                             <template x-if="kind(item, key) === 'number'">
                               <label class="field"><span x-text="key"></span>
                                 <input type="number" x-model.number="item[key]">

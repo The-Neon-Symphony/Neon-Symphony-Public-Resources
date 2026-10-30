@@ -12,10 +12,22 @@ function section(title, items, startKey, endFor, nameFor) {
   return rows.length ? [`  section ${title}`, ...rows] : [];
 }
 
+function performerSections(data) {
+  const instances = data.instances || [];
+  const end = (p) => p.startTime + (p.setLength || 0) * 60;
+  const groups = instances.map((inst) => ({
+    title: `Performers - ${clean(inst.name)}`,
+    items: data.performers.filter((p) => p.instanceId === inst.id),
+  }));
+  const known = new Set(instances.map((x) => x.id));
+  groups.push({ title: "Performers", items: data.performers.filter((p) => !known.has(p.instanceId)) });
+  return groups.flatMap((g) => section(g.title, g.items, "startTime", end, (p) => p.name));
+}
+
 export function buildGantt(data) {
   const lines = [
     ...section("Display windows", data.displayActive, "start", (w) => w.finish, (w) => w.name),
-    ...section("Performers", data.performers, "startTime", (p) => p.startTime + (p.setLength || 0) * 60, (p) => p.name),
+    ...performerSections(data),
   ];
   if (!lines.length) return null;
   return ["gantt", "  dateFormat YYYY-MM-DD HH:mm:ss", "  axisFormat %a %H:%M", "  tickInterval 1hour", ...lines].join("\n");

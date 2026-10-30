@@ -8,7 +8,7 @@ if (typeof mermaid !== "undefined") {
 const TIMESTAMP_KEYS = ["start", "finish", "startTime"];
 const MULTILINE_KEYS = ["pre", "inter", "post"];
 // Fields added by the publish action; they must never appear in the source data.json.
-const GENERATED_KEYS = ["logoUV", "gitHash"];
+const GENERATED_KEYS = ["logoUV", "instanceLogoUV", "gitHash"];
 
 const now = () => Math.floor(Date.now() / 1000);
 
@@ -32,8 +32,9 @@ document.addEventListener("alpine:init", () => {
     load(obj) {
       obj.messages ||= {};
       obj.displayActive = (obj.displayActive || []).map((w) => ({ name: "", ...w }));
+      obj.instances ||= [];
       obj.performers ||= [];
-      for (const target of [obj.messages, ...obj.performers]) GENERATED_KEYS.forEach((k) => delete target[k]);
+      for (const target of [obj.messages, ...obj.instances, ...obj.performers]) GENERATED_KEYS.forEach((k) => delete target[k]);
       this.data = obj;
     },
 
@@ -113,26 +114,35 @@ document.addEventListener("alpine:init", () => {
           { title: "Messages", list: [d.messages], single: true },
           { title: "Display active windows", list: d.displayActive, label: (it, i) => label(it, i, "(unnamed window)"),
             make: () => ({ name: "", start: now(), finish: now() + 3600 }) },
+          { title: "Instances", list: d.instances, label: (it, i) => `${it.id ?? "?"}. ${it.name || "(unnamed)"}`,
+            make: () => ({ id: this.nextInstanceId(), name: "", instanceLogoName: "" }) },
         ],
         [
           { title: "Performers", list: d.performers, label: (it, i) => label(it, i, "(unnamed)"),
             make: () => {
               const last = d.performers.at(-1);
               const startTime = last ? last.startTime + (last.setLength || 60) * 60 : now();
-              return { name: "", startTime, setLength: 60, logoName: "", genre: "", credits: { VJ: [], LD: [] } };
+              return { name: "", instanceId: last?.instanceId ?? d.instances[0]?.id ?? 1, startTime, setLength: 60, logoName: "", genre: "", credits: { VJ: [], LD: [] } };
             } },
         ],
       ];
+    },
+
+    nextInstanceId() {
+      return Math.max(0, ...this.data.instances.map((x) => Number(x.id) || 0)) + 1;
+    },
+
+    // A fresh duplicate of an instance must not reuse its id.
+    duplicate(list, i) {
+      const copy = structuredClone(Alpine.raw(list[i]));
+      if (list === this.data.instances) copy.id = this.nextInstanceId();
+      list.splice(i + 1, 0, copy);
     },
 
     move(list, i, delta) {
       const j = i + delta;
       if (j < 0 || j >= list.length) return;
       [list[i], list[j]] = [list[j], list[i]];
-    },
-
-    duplicate(list, i) {
-      list.splice(i + 1, 0, structuredClone(Alpine.raw(list[i])));
     },
 
     // --- fields ---
@@ -156,6 +166,7 @@ document.addEventListener("alpine:init", () => {
       const v = item[key];
       if (TIMESTAMP_KEYS.includes(key) && typeof v === "number") return "timestamp";
       if (key === "credits" && v && typeof v === "object") return "credits";
+      if (key === "instanceId" && typeof v === "number") return "instance";
       if (typeof v === "boolean") return "boolean";
       if (typeof v === "number") return "number";
       if (typeof v === "string") return MULTILINE_KEYS.includes(key) || v.includes("\n") ? "multiline" : "text";
