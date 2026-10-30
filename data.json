@@ -48,7 +48,9 @@
             "logoName": "Spirit Of The Symphony/DJ_Grimmy_Updated_Logo_Lit-1.webp",
             "genre": "Electro Swing",
             "credits": {
-                "VJ": [],
+                "VJ": [
+                    "Orca Toaster"
+                ],
                 "LD": [
                     "Lirodon"
                 ]
@@ -63,7 +65,9 @@
             "genre": "Liquid Drum n' Bass",
             "credits": {
                 "VJ": [
-                    "Siytron"
+                    "Manik",
+                    "Pulse",
+                    "Eunki"
                 ],
                 "LD": [
                     "Aetherios"
@@ -83,6 +87,9 @@
                 ],
                 "LD": [
                     "Fiendir"
+                ],
+                "Filming": [
+                    "New Edge Studios"
                 ]
             }
         },
@@ -127,7 +134,8 @@
             "genre": "Experimental Deep Dub",
             "credits": {
                 "VJ": [
-                    "Jayson"
+                    "Birdbrain",
+                    "What the Pup"
                 ],
                 "LD": [
                     "Goofy"
@@ -142,7 +150,9 @@
             "logoName": "Spirit Of The Symphony/Vat_Logo colored(1).png",
             "genre": "Psytrance",
             "credits": {
-                "VJ": [],
+                "VJ": [
+                    "Pulse"
+                ],
                 "LD": [
                     "DubbyWubby"
                 ]
@@ -157,7 +167,7 @@
             "genre": "UKG / UK Bass / 140 / Global Club",
             "credits": {
                 "VJ": [
-                    "Jayson"
+                    "What the Pup"
                 ],
                 "LD": [
                     "Kuropper"
@@ -172,7 +182,9 @@
             "logoName": "Spirit Of The Symphony/draven-logo-2026_namegradient-1.webp",
             "genre": "Midtempo",
             "credits": {
-                "VJ": [],
+                "VJ": [
+                    "Orca Toaster"
+                ],
                 "LD": [
                     "Lirodon"
                 ]
@@ -206,7 +218,7 @@
                     "Pulse"
                 ],
                 "LD": [
-                    "Draegon"
+                    "Lirodon"
                 ]
             }
         },
