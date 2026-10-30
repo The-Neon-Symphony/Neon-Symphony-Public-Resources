@@ -57,11 +57,27 @@ def main():
 
     data = json.loads(Path(args.data).read_text(encoding="utf-8"))
     entries = collect(data)
+    messages = data.get("messages")
+    instances = [e for e in data.get("instances", []) if isinstance(e, dict)]
+    instance_objects = {id(e) for e in instances}
+    used_instance_ids = {
+        e.get("instanceId")
+        for e in data.get("performers", [])
+        if isinstance(e, dict)
+    }
     images_dir = Path(args.images)
 
     names = []
     for e, name_key, uv_key in entries:
         e.pop(uv_key, None)
+        if e is messages and name_key == "logoName" and not e.get("logo"):
+            continue
+        if (
+            id(e) in instance_objects
+            and name_key == "instanceLogoName"
+            and e.get("id") not in used_instance_ids
+        ):
+            continue
         name = e[name_key]
         if name not in names:
             if (images_dir / name).is_file():
