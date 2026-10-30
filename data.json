@@ -20,6 +20,11 @@
             "name": "Day 2",
             "start": 1793480400,
             "finish": 1793509200
+        },
+        {
+            "name": "Testing",
+            "start": 1793375334,
+            "finish": 1793386434
         }
     ],
     "instances": [
